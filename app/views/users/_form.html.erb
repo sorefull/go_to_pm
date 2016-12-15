@@ -1,0 +1,15 @@
+<div class="col-md-6">
+  <%= bootstrap_form_for @user do |f| %>
+    <%= f.text_field :first_name %>
+    <%= f.text_field :last_name %>
+    <%= f.email_field :email %>
+    <%= f.date_field :birth_date %>
+    <%= f.text_field :skype_username %>
+    <%= f.telephone_field :phone_number %>
+    <%= f.date_field :start_date %>
+    <%= f.submit :save, class: 'btn btn-success btn-large' %>
+  <% end %>
+</div>
+<!-- <div class="col-md-d">
+avatar uploading
+</div> -->
