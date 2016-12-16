@@ -19,9 +19,6 @@ class VacationsController < ApplicationController
     end
   end
 
-  def show
-  end
-
   def destroy
     @vacation.destroy
     redirect_to @vacation.user, notice: 'Vacation was destroyed'

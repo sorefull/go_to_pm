@@ -1,1 +1,6 @@
 <h1>Index</h1>
+<% @vacations.each do |vacation| %>
+  <%= link_to vacation.user.email, vacation.user %> |
+  <%= vacation.vacation_type %> |
+  <%= vacation.start_time %> - <%= vacation.end_time %> <br>
+<% end %>
