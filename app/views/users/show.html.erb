@@ -5,3 +5,10 @@
 <%= @user.phone_number %>
 <%= link_to 'Edit', edit_user_path(@user) %>
 <%= link_to 'Delete', @user, method: :Delete %>
+<hr>
+<% @user.vacations.each do |vacation| %>
+  <%= vacation.vacation_type %>
+  <%= vacation.start_time.strftime("%A, %b %d") %> -
+  <%= vacation.end_time.strftime("%A, %b %d") if vacation.vacation_type == 'vacation' %><br>
+<% end %>
+<%= link_to 'Add vacation', new_user_vacation_path(@user), class: 'btn btn-success' %>

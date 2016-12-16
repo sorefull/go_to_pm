@@ -36,6 +36,8 @@ gem 'devise-bootstrap-views'
 gem 'bootstrap_form'
 gem 'annotate'
 gem 'will_paginate-bootstrap'
+gem 'pry'
+gem 'date_validator'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

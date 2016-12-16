@@ -1,0 +1,10 @@
+<h1>New vacation</h1>
+<div class="col-md-6">
+  <%= bootstrap_form_for [@user, @vacation] do |f| %>
+    <%= f.select :vacation_type, Vacation.vacation_types.keys %>
+    <%= f.date_field :start_time %>
+    <%= f.date_field :end_time %>
+    <%= f.text_area :comment %>
+    <%= f.submit :save, class: 'btn btn-success' %>
+  <% end %>
+</div>

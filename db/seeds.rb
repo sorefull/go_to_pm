@@ -6,8 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-User.create(email: 'admin@goto.com', first_name: 'Oleg', last_name: 'Cherednichenko', start_date: Time.zone.now, password: 'adminadmin')
+User.create(email: 'admin@goto.com', first_name: 'Oleg', last_name: 'Cherednichenko', start_date: Time.zone.now - 1.day, password: 'adminadmin')
 
 10.times do |n|
-  User.create(email: "#{n}_user@example.com", first_name: "#{n}_name", last_name: "#{n}_last_name", password: 'password')
+  User.create(email: "#{n}_user@example.com", first_name: "#{n}_name", last_name: "#{n}_last_name", start_date: Time.zone.now - 1.day, password: 'password')
 end
