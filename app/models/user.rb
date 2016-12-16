@@ -20,9 +20,9 @@
 #  birth_date             :datetime
 #  skype_username         :string
 #  phone_number           :string
-#  start_date             :datetime         default("2016-12-16 08:39:33.510695"), not null
-#  vacation_count         :integer
-#  day_off_count          :integer
+#  start_date             :datetime
+#  vacation_count         :integer          default("0"), not null
+#  day_off_count          :integer          default("0"), not null
 #
 
 class User < ApplicationRecord
@@ -31,7 +31,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :rememberable, :trackable, :validatable
 
   validates :first_name, :last_name, :start_date, presence: true
-  validates :start_date, date: { before_or_equal_to: Time.zone.now }
+  validates :start_date, date: { before_or_equal_to: Date.today.beginning_of_day }
 
   has_many :vacations
 end

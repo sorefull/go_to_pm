@@ -20,9 +20,9 @@
 #  birth_date             :datetime
 #  skype_username         :string
 #  phone_number           :string
-#  start_date             :datetime         default("2016-12-16 08:39:33.510695"), not null
-#  vacation_count         :integer
-#  day_off_count          :integer
+#  start_date             :datetime
+#  vacation_count         :integer          default("0"), not null
+#  day_off_count          :integer          default("0"), not null
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
