@@ -1,0 +1,8 @@
+<h1>Statics#landing</h1>
+<p>Find me in app/views/statics/landing.html.erb</p>
+<% if user_signed_in? %>
+  <%= link_to 'Lg out', destroy_user_session_path, method: :delete, class: 'btn btn-danger' %>
+  <%= link_to 'Users', users_path, class: 'btn btn-primary' %>
+<% else %>
+  <%= link_to 'Log in', new_user_session_path, class: 'btn btn-default' %>
+<% end %>
