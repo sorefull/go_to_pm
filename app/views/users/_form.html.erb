@@ -7,6 +7,9 @@
     <%= f.text_field :skype_username %>
     <%= f.telephone_field :phone_number %>
     <%= f.date_field :start_date %>
+    <%= image_tag @user.avatar.thumb.url %>
+    <%= f.file_field :avatar %>
+    <%= f.text_area :comment %>
     <%= f.submit :save, class: 'btn btn-success btn-large' %>
   <% end %>
 </div>

@@ -5,6 +5,7 @@
 <%= @user.phone_number %>
 <%= link_to 'Edit', edit_user_path(@user) %>
 <%= link_to 'Delete', @user, method: :Delete %>
+<%= image_tag @user.avatar.thumb.url %>
 <hr>
 <% @user.vacations.each do |vacation| %>
   <%= vacation.vacation_type %>

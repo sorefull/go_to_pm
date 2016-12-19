@@ -34,6 +34,7 @@ class UsersController < ApplicationController
   def destroy
     unless current_user == @user
       @user.destroy
+      FileUtils.rm_rf("public/uploads/user/avatar/#{@user.id}")
       redirect_to users_path, notice: "#{@user.first_name} was destroyed!"
     else
       redirect_to users_path, alert: 'You can not delete yourself'
@@ -42,7 +43,7 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:email, :first_name, :last_name, :birth_date, :skype_username, :phone_number, :start_date)
+    params.require(:user).permit(:email, :first_name, :last_name, :birth_date, :skype_username, :phone_number, :start_date, :avatar, :comment)
   end
 
   def set_user

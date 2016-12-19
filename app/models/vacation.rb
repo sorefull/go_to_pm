@@ -13,11 +13,6 @@
 #
 
 class Vacation < ApplicationRecord
-  # validates :expiration_date,
-  #           date: { after: Proc.new { Time.now },
-  #           before: Proc.new { Time.now + 1.year } }
-
-
   belongs_to :user
   validates :vacation_type, :start_time, :user, presence: true
   validates :end_time, presence: true, if: :vacation?
