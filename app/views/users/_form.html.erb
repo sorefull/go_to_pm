@@ -1,5 +1,5 @@
-<div class="col-md-6">
-  <%= bootstrap_form_for @user do |f| %>
+<%= bootstrap_form_for @user do |f| %>
+  <div class="col-md-6">
     <%= f.text_field :first_name %>
     <%= f.text_field :last_name %>
     <%= f.email_field :email %>
@@ -7,12 +7,13 @@
     <%= f.text_field :skype_username %>
     <%= f.telephone_field :phone_number %>
     <%= f.date_field :start_date %>
+    <%= f.text_area :comment %>
+  </div>
+  <div class="col-md-4 col-md-offset-2">
     <%= image_tag @user.avatar.thumb.url %>
     <%= f.file_field :avatar %>
-    <%= f.text_area :comment %>
+  </div>
+  <div class="col-md-12">
     <%= f.submit :save, class: 'btn btn-success btn-large' %>
-  <% end %>
-</div>
-<!-- <div class="col-md-d">
-avatar uploading
-</div> -->
+  </div>
+<% end %>

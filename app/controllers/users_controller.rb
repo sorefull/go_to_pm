@@ -1,10 +1,13 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:edit, :destroy, :show, :update]
   def index
-    @users = User.paginate(:page => params[:page], :per_page => 4)
+    @users = User.all
   end
 
   def show
+    params['period'] ||= 'future'
+    @past_vacations = @user.vacations.where("start_time < ?", Date.today.beginning_of_day)
+    @future_vacations = @user.vacations.where("start_time > ?", Date.today.beginning_of_day)
   end
 
   def new

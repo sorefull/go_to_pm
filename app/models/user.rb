@@ -23,6 +23,8 @@
 #  start_date             :datetime
 #  vacation_count         :integer          default("0"), not null
 #  day_off_count          :integer          default("0"), not null
+#  avatar                 :string
+#  comment                :text
 #
 
 class User < ApplicationRecord

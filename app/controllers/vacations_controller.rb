@@ -3,7 +3,9 @@ class VacationsController < ApplicationController
   before_action :set_user, only: [:new, :create]
 
   def index
-    @vacations = Vacation.paginate(:page => params[:page], :per_page => 4)
+    vacations = Vacation.all
+    @past_vacations = vacations.where("start_time < ?", Date.today.beginning_of_day)
+    @future_vacations = vacations.where("start_time > ?", Date.today.beginning_of_day)
   end
 
   def new
@@ -17,6 +19,10 @@ class VacationsController < ApplicationController
     else
       render 'new'
     end
+  end
+
+  def show
+
   end
 
   def destroy

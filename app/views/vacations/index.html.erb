@@ -1,6 +1,49 @@
-<h1>Index</h1>
-<% @vacations.each do |vacation| %>
-  <%= link_to vacation.user.email, vacation.user %> |
-  <%= vacation.vacation_type %> |
-  <%= vacation.start_time %> - <%= vacation.end_time %> <br>
-<% end %>
+<h1>Vacations</h1>
+<div class="row">
+  <div class="col-md-8">
+    <ul class="nav nav-tabs">
+      <li role="presentation" id="to_past"><%= link_to 'Past', '', class: 'to_past', remote: true %></li>
+      <li role="presentation" id="to_future" class="active"><%= link_to 'Future', '', class: 'to_future', remote: true %></li>
+    </ul>
+    <table class="table table-hover past_vacations" style="display: none;">
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Vacation type</th>
+          <th>Vacation period</th>
+          <th>(Days)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @past_vacations.each do |vacation| %>
+        <tr>
+          <td><%= link_to "#{vacation.user.first_name} #{vacation.user.last_name}", vacation.user %></td>
+          <td><%= vacation.vacation_type %></td>
+          <td><%= vacation.start_time.strftime("%A, %b %d") %> <%= '- ' + vacation.end_time.strftime("%A, %b %d") if vacation.vacation_type == 'vacation' %></td>
+          <td><%= vacation.vacation? ? ((vacation.end_time - vacation.start_time)/1.day).to_i : 1 %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <table class="table table-hover future_vacations">
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Vacation type</th>
+          <th>Vacation period</th>
+          <th>(Days)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @future_vacations.each do |vacation| %>
+        <tr>
+          <td><%= link_to "#{vacation.user.first_name} #{vacation.user.last_name}", vacation.user %></td>
+          <td><%= vacation.vacation_type %></td>
+          <td><%= vacation.start_time.strftime("%A, %b %d") %> <%= '- ' + vacation.end_time.strftime("%A, %b %d") if vacation.vacation_type == 'vacation' %></td>
+          <td><%= vacation.vacation? ? ((vacation.end_time - vacation.start_time)/1.day).to_i : 1 %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

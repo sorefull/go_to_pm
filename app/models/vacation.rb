@@ -16,7 +16,7 @@ class Vacation < ApplicationRecord
   belongs_to :user
   validates :vacation_type, :start_time, :user, presence: true
   validates :end_time, presence: true, if: :vacation?
-  validates :start_time, date: { after_or_equal_to: Date.today.beginning_of_day }
+  # validates :start_time, date: { after_or_equal_to: Date.today.beginning_of_day }
   validates :end_time, date: { after: :start_time }, if: :vacation?
 
   before_save :set_users_counters_variables
