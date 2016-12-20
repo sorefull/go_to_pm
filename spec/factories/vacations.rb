@@ -12,10 +12,15 @@
 #  updated_at    :datetime         not null
 #
 
-require 'test_helper'
-
-class VacationTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+FactoryGirl.define do
+  factory :vacation do
+    start_time Faker::Date.forward(15)
+    trait :vacation do
+      vacation_type 0
+      end_time Faker::Date.forward(15) + 15.day
+    end
+    trait :day_off do
+      vacation_type 1
+    end
+  end
 end
