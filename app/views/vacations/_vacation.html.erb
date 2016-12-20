@@ -1,68 +1,68 @@
+<div class="modal fade" tabindex="-1" role="dialog" id="my_modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Vacation Info</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <b>Vacation type:</b> <%= @vacation.vacation_type %>
+          </div>
 
-  <div class="modal fade" tabindex="-1" role="dialog" id="my_modal">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">Vacation Info</h4>
         </div>
-        <div class="modal-body">
+        <div class="row vert-offset-top-1">
+          <div class="col-md-12">
+            <b>
+              First and last name:
+            </b>
+          </div>
+          <div class="col-md-12">
+            <%= @vacation.user.first_name %>
+            <%= @vacation.user.last_name %>
+          </div>
+        </div>
+
+        <div class="vert-offset-top-1">
           <div class="row">
             <div class="col-md-12">
-              <b>Vacation type:</b> <%= @vacation.vacation_type %>
-            </div>
-
-          </div>
-          <div class="row vert-offset-top-1">
-            <div class="col-md-12">
               <b>
-                First and last name:
+                Start time:
               </b>
             </div>
             <div class="col-md-12">
-              <%= @vacation.user.first_name %>
-              <%= @vacation.user.last_name %>
+              <%= @vacation.start_time.strftime("%A, %b %d") %>
             </div>
           </div>
 
-          <div class="vert-offset-top-1">
-            <div class="row">
-              <div class="col-md-12">
-                <b>
-                  Start time:
-                </b>
-              </div>
-              <div class="col-md-12">
-                <%= @vacation.start_time.strftime("%A, %b %d") %>
-              </div>
+          <% if @vacation.vacation_type == 'vacation' %>
+          <div class="row">
+            <div class="col-md-12">
+              <b>
+                End time:
+              </b>
             </div>
+            <div class="col-md-12">
+              <%= @vacation.end_time.strftime("%A, %b %d") %>
+            </div>
+          </div>
+          <% end %>
 
-            <% if @vacation.vacation_type == 'vacation' %>
-            <div class="row">
-              <div class="col-md-12">
-                <b>
-                  End time:
-                </b>
-              </div>
-              <div class="col-md-12">
-                <%= @vacation.end_time.strftime("%A, %b %d") %>
-              </div>
+          <% if @vacation.comment != '' %>
+          <div class="row vert-offset-top-1">
+            <div class="col-md-12">
+              <b>
+                Comment:
+              </b>
             </div>
-            <% end %>
-
-            <% if @vacation.comment != '' %>
-            <div class="row vert-offset-top-1">
-              <div class="col-md-12">
-                <b>
-                  Comment:
-                </b>
-              </div>
-              <div class="col-md-12">
-                <%= @vacation.comment %>
-              </div>
+            <div class="col-md-12">
+              <%= @vacation.comment %>
             </div>
-            <% end %>
+          </div>
+          <% end %>
         </div>
       </div>
     </div>
   </div>
+</div>

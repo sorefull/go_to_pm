@@ -2,8 +2,8 @@
 <div class="row">
   <div class="col-md-8">
     <ul class="nav nav-tabs">
-      <li role="presentation" id="to_past"><%= link_to 'Past', '', class: 'to_past', remote: true %></li>
-      <li role="presentation" id="to_future" class="active"><%= link_to 'Future', '', class: 'to_future', remote: true %></li>
+      <li role="presentation" id="to_past"><%= link_to "Past #{ @vacations.past.count }", '', class: 'to_past', remote: true %></li>
+      <li role="presentation" id="to_future" class="active"><%= link_to "Future #{ @vacations.future.count }", '', class: 'to_future', remote: true %></li>
     </ul>
     <table class="table table-hover past_vacations" style="display: none;">
       <thead>
@@ -11,7 +11,7 @@
           <th>User</th>
           <th>Vacation type</th>
           <th>Vacation period</th>
-          <th>(Days)</th>
+          <th>(Days)<%= @vacations.past.count %></th>
         </tr>
       </thead>
       <tbody>
@@ -20,7 +20,7 @@
           <td><%= link_to "#{vacation.user.first_name} #{vacation.user.last_name}", vacation.user %></td>
           <td><%= link_to vacation.vacation_type, vacation, class: 'show_vacation', remote: true %></td>
           <td><%= vacation.start_time.strftime("%A, %b %d") %> <%= '- ' + vacation.end_time.strftime("%A, %b %d") if vacation.vacation_type == 'vacation' %></td>
-          <td><%= vacation.vacation? ? ((vacation.end_time - vacation.start_time)/1.day).to_i : 1 %></td>
+          <td><%= vacation.vacation? ? vacation.workdays_in_range : 1 %></td>
         </tr>
         <% end %>
       </tbody>
@@ -40,7 +40,7 @@
           <td><%= link_to "#{vacation.user.first_name} #{vacation.user.last_name}", vacation.user %></td>
           <td><%= link_to vacation.vacation_type, vacation, class: 'show_vacation', remote: true %></td>
           <td><%= vacation.start_time.strftime("%A, %b %d") %> <%= '- ' + vacation.end_time.strftime("%A, %b %d") if vacation.vacation_type == 'vacation' %></td>
-          <td><%= vacation.vacation? ? ((vacation.end_time - vacation.start_time)/1.day).to_i : 1 %></td>
+          <td><%= vacation.vacation? ? vacation.workdays_in_range : 1 %></td>
         </tr>
         <% end %>
       </tbody>

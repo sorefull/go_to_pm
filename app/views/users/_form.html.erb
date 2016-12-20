@@ -9,9 +9,11 @@
     <%= f.date_field :start_date %>
     <%= f.text_area :comment %>
   </div>
-  <div class="col-md-4 col-md-offset-2">
+  <div class="col-md-5 col-md-offset-1">
     <%= image_tag @user.avatar.thumb.url %>
     <%= f.file_field :avatar %>
+    <%= f.text_field :vacation_count %>
+    <%= f.text_field :day_off_count %>
   </div>
   <div class="col-md-12">
     <%= f.submit :save, class: 'btn btn-success btn-large' %>

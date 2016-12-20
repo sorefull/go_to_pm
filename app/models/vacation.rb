@@ -24,7 +24,7 @@ class Vacation < ApplicationRecord
     self.end_time = nil if self.day_off?
     user = User.find(self.user.id)
     if self.vacation?
-      user.vacation_count -= (self.end_time - self.start_time).to_i/1.day
+      user.vacation_count -= self.workdays_in_range
       user.save
     elsif self.day_off?
       user.day_off_count -= 1
@@ -34,7 +34,11 @@ class Vacation < ApplicationRecord
 
   enum vacation_type: [:vacation, :day_off]
 
-  scope :past, -> { where("start_time < ?", Date.today.beginning_of_day) }
-  scope :future, -> { where("start_time > ?", Date.today.beginning_of_day) }
+  scope :past, -> { where("start_time < ?", Date.today.beginning_of_day).order("start_time DESC") }
+  scope :future, -> { where("start_time >= ?", Date.today.beginning_of_day).order("start_time ASC") }
 
+  # offset is a non sun&sut holidays in range
+  def workdays_in_range(offset=0)
+    (self.start_time.to_date...self.end_time.to_date).select { |d| (1..5).include?(d.wday) }.size - offset + 1
+  end
 end
