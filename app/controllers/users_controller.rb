@@ -14,7 +14,7 @@ class UsersController < ApplicationController
   def create
     @user = User.create(user_params.merge(password: SecureRandom.hex(10)))
     if @user.save
-      redirect_to users_path, notice: 'User was sucessfuly created'
+      redirect_to @user, notice: 'User was sucessfuly created'
     else
       render 'new'
     end
@@ -25,7 +25,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      redirect_to users_path, notice: 'User was sucessfuly updated'
+      redirect_to @user, notice: 'User was sucessfuly updated'
     else
       render 'edit'
     end
