@@ -33,4 +33,8 @@ class Vacation < ApplicationRecord
   end
 
   enum vacation_type: [:vacation, :day_off]
+
+  scope :past, -> { where("start_time < ?", Date.today.beginning_of_day) }
+  scope :future, -> { where("start_time > ?", Date.today.beginning_of_day) }
+
 end

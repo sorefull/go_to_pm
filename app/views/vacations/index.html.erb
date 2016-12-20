@@ -15,7 +15,7 @@
         </tr>
       </thead>
       <tbody>
-        <% @past_vacations.each do |vacation| %>
+        <% @vacations.past.each do |vacation| %>
         <tr>
           <td><%= link_to "#{vacation.user.first_name} #{vacation.user.last_name}", vacation.user %></td>
           <td><%= link_to vacation.vacation_type, vacation, class: 'show_vacation', remote: true %></td>
@@ -35,7 +35,7 @@
         </tr>
       </thead>
       <tbody>
-        <% @future_vacations.each do |vacation| %>
+        <% @vacations.future.each do |vacation| %>
         <tr>
           <td><%= link_to "#{vacation.user.first_name} #{vacation.user.last_name}", vacation.user %></td>
           <td><%= link_to vacation.vacation_type, vacation, class: 'show_vacation', remote: true %></td>

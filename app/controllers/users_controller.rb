@@ -5,9 +5,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    params['period'] ||= 'future'
-    @past_vacations = @user.vacations.where("start_time < ?", Date.today.beginning_of_day)
-    @future_vacations = @user.vacations.where("start_time > ?", Date.today.beginning_of_day)
   end
 
   def new

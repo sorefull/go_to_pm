@@ -3,9 +3,7 @@ class VacationsController < ApplicationController
   before_action :set_user, only: [:new, :create]
 
   def index
-    vacations = Vacation.all
-    @past_vacations = vacations.where("start_time < ?", Date.today.beginning_of_day)
-    @future_vacations = vacations.where("start_time > ?", Date.today.beginning_of_day)
+    @vacations = Vacation.all
   end
 
   def new
