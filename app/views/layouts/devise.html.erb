@@ -9,8 +9,9 @@
   </head>
 
   <body>
+    <%= render 'source/header' %>
     <div class="container">
-      <div class="row vert-offset-top-5">
+      <div class="row vert-offset-top-10">
         <div class="col-md-4 col-md-offset-4">
           <% if alert %>
             <div class="alert alert-danger alert-dismissible">
@@ -28,5 +29,6 @@
         </div>
       </div>
     </div>
+    <%= render 'source/footer' %>
   </body>
 </html>

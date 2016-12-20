@@ -15,12 +15,16 @@
 #  last_sign_in_ip        :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
-#  first_name             :string           default(""), not null
-#  last_name              :string           default(""), not null
+#  first_name             :string
+#  last_name              :string
 #  birth_date             :datetime
 #  skype_username         :string
 #  phone_number           :string
-#  start_date             :datetime         default("2016-12-15 16:17:36.856252"), not null
+#  start_date             :datetime
+#  vacation_count         :integer          default("0"), not null
+#  day_off_count          :integer          default("0"), not null
+#  avatar                 :string
+#  comment                :text
 #
 
 class User < ApplicationRecord
@@ -29,4 +33,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :rememberable, :trackable, :validatable
 
   validates :first_name, :last_name, :start_date, presence: true
+  validates :start_date, date: { before_or_equal_to: Date.today.beginning_of_day }
+
+  has_many :vacations
+
+  mount_uploader :avatar, AvatarUploader
 end

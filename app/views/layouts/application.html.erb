@@ -9,22 +9,29 @@
   </head>
 
   <body>
+    <%= render 'source/header' %>
     <div class="container">
-      <div class="row">
-        <% if alert %>
-        <div class="alert alert-danger alert-dismissible">
-          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-          <strong>Alert!</strong> <%= alert %>
+      <div class="row vert-offset-top-5 vert-offset-bottom-5">
+        <div class="row">
+
+          <div class="col-md-6 col-md-offset-3">
+            <% if alert %>
+            <div class="alert alert-danger alert-dismissible">
+              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+              <strong>Alert!</strong> <%= alert %>
+            </div>
+            <% end %>
+            <% if notice %>
+            <div class="alert alert-info alert-dismissible">
+              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+              <strong>Notice!</strong> <%= notice %>
+            </div>
+            <% end %>
+          </div>
         </div>
-        <% end %>
-        <% if notice %>
-        <div class="alert alert-info alert-dismissible">
-          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-          <strong>Notice!</strong> <%= notice %>
-        </div>
-        <% end %>
         <%= yield %>
       </div>
     </div>
+    <%= render 'source/footer' %>
   </body>
 </html>

@@ -1,7 +1,164 @@
-<%= @user.id %>
-<%= @user.first_name %>
-<%= @user.last_name %>
-<%= @user.email %>
-<%= @user.phone_number %>
-<%= link_to 'Edit', edit_user_path(@user) %>
-<%= link_to 'Delete', @user, method: :Delete %>
+<div class="row">
+  <div class="col-md-2">
+    <%= image_tag @user.avatar.thumb.url, class: 'img-rounded' %>
+    <p class="vert-offset-top-1">
+      <%= link_to 'Edit', edit_user_path(@user), class: 'btn btn-primary' %>
+      <%= link_to 'Delete', @user, method: :Delete, class: 'btn btn-danger' %>
+    </p>
+  </div>
+
+  <div class="col-md-10">
+    <div class="row">
+      <div class="col-md-3">
+        <b>
+          First and last name:
+        </b>
+      </div>
+      <div class="col-md-9">
+        <%= @user.first_name %>
+        <%= @user.last_name %>
+      </div>
+    </div>
+
+    <div class="row vert-offset-top-1">
+      <div class="col-md-3">
+        <b>Vacation count:</b>
+      </div>
+      <div class="col-md-9">
+        <%= @user.vacation_count %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3">
+        <b>Day off count:</b>
+      </div>
+      <div class="col-md-9">
+        <%= @user.day_off_count %>
+      </div>
+    </div>
+
+    <div class="vert-offset-top-1">
+      <div class="row">
+        <div class="col-md-3">
+          <b>
+            Email:
+          </b>
+        </div>
+        <div class="col-md-9">
+          <%= @user.email %>
+        </div>
+      </div>
+
+      <% if @user.phone_number != '' %>
+      <div class="row">
+        <div class="col-md-3">
+          <b>
+            Phone number:
+          </b>
+        </div>
+        <div class="col-md-9">
+          <%= @user.phone_number %>
+        </div>
+      </div>
+      <% end %>
+
+      <% if @user.skype_username != '' %>
+      <div class="row">
+        <div class="col-md-3">
+          <b>
+            Skype username:
+          </b>
+        </div>
+        <div class="col-md-9">
+          <%= @user.skype_username %>
+        </div>
+      </div>
+      <% end %>
+    </div>
+
+    <% if @user.birth_date %>
+    <div class="row vert-offset-top-1">
+      <div class="col-md-3">
+        <b>
+          Birth date:
+        </b>
+      </div>
+      <div class="col-md-9">
+        <%= @user.birth_date.strftime("%A, %b %d") %>
+      </div>
+    </div>
+    <% end %>
+
+    <div class="row vert-offset-top-1">
+      <div class="col-md-3">
+        <b>
+          Start date:
+        </b>
+      </div>
+      <div class="col-md-9">
+        <%= @user.start_date.strftime("%A, %b %d") %>
+      </div>
+    </div>
+
+    <% if @user.comment != '' %>
+    <div class="row vert-offset-top-1">
+      <div class="col-md-3">
+        <b>
+          Comment:
+        </b>
+      </div>
+      <div class="col-md-9">
+        <%= @user.comment %>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="row vert-offset-top-2">
+  <div class="col-md-8">
+    <ul class="nav nav-tabs">
+      <li role="presentation" id="to_past"><%= link_to "Past #{ @user.vacations.past.count }", '', class: 'to_past', remote: true %></li>
+      <li role="presentation" id="to_future" class="active"><%= link_to "Future #{ @user.vacations.future.count }", '', class: 'to_future', remote: true %></li>
+    </ul>
+    <table class="table table-hover past_vacations" style="display: none;">
+      <thead>
+        <tr>
+          <th>Vacation type</th>
+          <th>Vacation period</th>
+          <th>(Days)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @user.vacations.past.each do |vacation| %>
+        <tr>
+          <td><%= link_to vacation.vacation_type, vacation, class: 'show_vacation', remote: true %></td>
+          <td><%= vacation.start_time.strftime("%A, %b %d") %> <%= '- ' + vacation.end_time.strftime("%A, %b %d") if vacation.vacation_type == 'vacation' %></td>
+          <td><%= vacation.vacation? ? vacation.workdays_in_range : 1 %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <table class="table table-hover future_vacations">
+      <thead>
+        <tr>
+          <th>Vacation type</th>
+          <th>Vacation period</th>
+          <th>(Days)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @user.vacations.future.each do |vacation| %>
+        <tr>
+          <td><%= link_to vacation.vacation_type, vacation, class: 'show_vacation', remote: true %></td>
+          <td><%= vacation.start_time.strftime("%A, %b %d") %> <%= '- ' + vacation.end_time.strftime("%A, %b %d") if vacation.vacation_type == 'vacation' %></td>
+          <td><%= vacation.vacation? ? vacation.workdays_in_range : 1 %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= link_to 'Add vacation', new_user_vacation_path(@user), class: 'btn btn-success' %>
+  </div>
+</div>
+<div class="vacation"></div>
