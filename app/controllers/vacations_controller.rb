@@ -22,7 +22,7 @@ class VacationsController < ApplicationController
   end
 
   def show
-
+    render partial: 'vacation'
   end
 
   def destroy
@@ -38,7 +38,7 @@ class VacationsController < ApplicationController
   end
 
   def set_vacation
-    @vacation = Vacafion.find(params[:id])
+    @vacation = Vacation.find(params[:id])
   end
 
   def set_user

@@ -133,7 +133,7 @@
       <tbody>
         <% @past_vacations.each do |vacation| %>
         <tr>
-          <td><%= vacation.vacation_type %></td>
+          <td><%= link_to vacation.vacation_type, vacation, class: 'show_vacation', remote: true %></td>
           <td><%= vacation.start_time.strftime("%A, %b %d") %> <%= '- ' + vacation.end_time.strftime("%A, %b %d") if vacation.vacation_type == 'vacation' %></td>
           <td><%= vacation.vacation? ? ((vacation.end_time - vacation.start_time)/1.day).to_i : 1 %></td>
         </tr>
@@ -151,7 +151,7 @@
       <tbody>
         <% @future_vacations.each do |vacation| %>
         <tr>
-          <td><%= vacation.vacation_type %></td>
+          <td><%= link_to vacation.vacation_type, vacation, class: 'show_vacation', remote: true %></td>
           <td><%= vacation.start_time.strftime("%A, %b %d") %> <%= '- ' + vacation.end_time.strftime("%A, %b %d") if vacation.vacation_type == 'vacation' %></td>
           <td><%= vacation.vacation? ? ((vacation.end_time - vacation.start_time)/1.day).to_i : 1 %></td>
         </tr>
@@ -161,3 +161,4 @@
     <%= link_to 'Add vacation', new_user_vacation_path(@user), class: 'btn btn-success' %>
   </div>
 </div>
+<div class="vacation"></div>
