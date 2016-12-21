@@ -10,7 +10,7 @@
     <%= f.text_area :comment %>
   </div>
   <div class="col-md-5 col-md-offset-1">
-    <%= image_tag @user.avatar.thumb.url %>
+    <%= image_tag @user.avatar.thumb.url, class: 'img-rounded' %>
     <%= f.file_field :avatar %>
     <%= f.text_field :vacation_count %>
     <%= f.text_field :day_off_count %>

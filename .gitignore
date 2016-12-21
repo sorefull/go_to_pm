@@ -22,3 +22,6 @@
 
 # Ignore all uploaded files and temp.
 /public/uploads/*
+
+# Ignore application configuration
+/config/application.yml
