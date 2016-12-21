@@ -14,12 +14,22 @@
 
 FactoryGirl.define do
   factory :vacation do
-    start_time Faker::Date.forward(15)
-    trait :vacation do
-      vacation_type 0
+    trait :future_vacation do
+      start_time Faker::Date.forward(15)
       end_time Faker::Date.forward(15) + 15.day
+      vacation_type 0
     end
-    trait :day_off do
+    trait :future_day_off do
+      start_time Faker::Date.forward(15)
+      vacation_type 1
+    end
+    trait :past_vacation do
+      start_time Faker::Date.backward(15) -15
+      end_time Faker::Date.backward(15)
+      vacation_type 0
+    end
+    trait :past_day_off do
+      start_time Faker::Date.backward(15)
       vacation_type 1
     end
   end

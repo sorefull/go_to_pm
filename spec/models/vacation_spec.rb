@@ -23,29 +23,30 @@ RSpec.describe Vacation, type: :model do
     it { should_not validate_presence_of(:end_time) }
   end
 
+  it { should belong_to(:user) }
+
   let!(:user) do
     create(:user)
   end
 
-  let!(:vacation) do
-    create(:vacation, :vacation, user: user)
+  context "vacation creation" do
+    let!(:vacation) do
+      create(:vacation, :past_vacation, user: user)
+    end
+    it 'vacation count should equal 1' do
+      expect(Vacation.count).to eq(1)
+    end
+    it 'users vacation_count should be less than 0' do
+      expect(User.first.vacation_count).to be < 0
+    end
   end
-
-  it 'vacation creation' do
-    expect(Vacation.count).to eq(1)
-  end
-
-  it { should belong_to(:user) }
 
   context "before save actions" do
     let!(:day_off_with_end_time) do
-      create(:vacation, :day_off, end_time: Time.now, user: user)
+      create(:vacation, :past_day_off, end_time: Time.now, user: user)
     end
-
     it "should cut end time if it is day_off" do
       expect(day_off_with_end_time.end_time).to eq nil
     end
   end
-
-
 end
