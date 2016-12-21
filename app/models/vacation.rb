@@ -39,6 +39,6 @@ class Vacation < ApplicationRecord
 
   # offset is a non sun&sut holidays in range
   def workdays_in_range(offset=0)
-    (self.start_time.to_date...self.end_time.to_date).select { |d| (1..5).include?(d.wday) }.size - offset + 1
+    (self.start_time.to_date..self.end_time.to_date).select { |d| (1..5).include?(d.wday) }.size - offset
   end
 end

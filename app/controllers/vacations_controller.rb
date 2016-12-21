@@ -7,7 +7,7 @@ class VacationsController < ApplicationController
   end
 
   def new
-    @vacation = @user.vacations.build
+    @vacation = @user.vacations.build(offset: 0)
   end
 
   def create
