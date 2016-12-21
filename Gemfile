@@ -38,6 +38,7 @@ gem 'pry'
 gem 'date_validator'
 gem 'carrierwave', '>= 1.0.0.rc', '< 2.0'
 gem 'mini_magick', '~> 4.3'
+# NewRelic
 gem 'newrelic_rpm'
 
 group :development, :test do
