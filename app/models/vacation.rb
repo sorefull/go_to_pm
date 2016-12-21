@@ -18,13 +18,14 @@ class Vacation < ApplicationRecord
   validates :end_time, presence: true, if: :vacation?
   # validates :start_time, date: { after_or_equal_to: Date.today.beginning_of_day }
   validates :end_time, date: { after: :start_time }, if: :vacation?
+  validates :offset, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than: :workdays_in_range }
 
   before_save :set_users_counters_variables
   def set_users_counters_variables
     self.end_time = nil if self.day_off?
     user = User.find(self.user.id)
     if self.vacation?
-      user.vacation_count -= self.workdays_in_range
+      user.vacation_count -= self.workdays_in_range(self.offset)
       user.save
     elsif self.day_off?
       user.day_off_count -= 1
@@ -39,6 +40,6 @@ class Vacation < ApplicationRecord
 
   # offset is a non sun&sut holidays in range
   def workdays_in_range(offset=0)
-    (self.start_time.to_date...self.end_time.to_date).select { |d| (1..5).include?(d.wday) }.size - offset + 1
+    (self.start_time.to_date...self.end_time.to_date).select { |d| (1..5).include?(d.wday) }.size - offset.to_i + 1
   end
 end

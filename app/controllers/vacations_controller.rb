@@ -32,7 +32,7 @@ class VacationsController < ApplicationController
 
   private
   def vacation_params
-    params.require(:vacation).permit(:vacation_type, :start_time, :end_time, :comment)
+    params.require(:vacation).permit(:vacation_type, :start_time, :end_time, :comment, :offset)
   end
 
   def set_vacation
