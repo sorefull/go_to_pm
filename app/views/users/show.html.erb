@@ -115,53 +115,61 @@
     <% end %>
   </div>
 </div>
-
+<div class="row vert-offset-top-2">
+  <div class="col-md-4">
+    <%= link_to 'All', user_show_vacations_path(@user, type: :all), class: 'btn btn-default btn-primary search_vacations', remote: true %>
+    <%= link_to 'Day offs', user_show_vacations_path(@user, type: :day_off), class: 'btn btn-default search_vacations', remote: true %>
+    <%= link_to 'Vacations', user_show_vacations_path(@user, type: :vacation), class: 'btn btn-default search_vacations', remote: true %>
+  </div>
+</div>
 <div class="row vert-offset-top-2">
   <div class="col-md-8">
-    <ul class="nav nav-tabs">
-      <li role="presentation" id="to_past"><%= link_to "Past #{ @user.vacations.past.count }", '', class: 'to_past', remote: true %></li>
-      <li role="presentation" id="to_future" class="active"><%= link_to "Future #{ @user.vacations.future.count }", '', class: 'to_future', remote: true %></li>
-    </ul>
-    <table class="table table-hover past_vacations" style="display: none;">
-      <thead>
-        <tr>
-          <th>Vacation type</th>
-          <th>Vacation period</th>
-          <th>(Days)</th>
-          <th>offset</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @user.vacations.past.each do |vacation| %>
-        <tr>
-          <td><%= link_to vacation.vacation_type, vacation, class: 'show_vacation', remote: true %></td>
-          <td><%= vacation.start_time.strftime("%A, %b %d") %> <%= '- ' + vacation.end_time.strftime("%A, %b %d") if vacation.vacation_type == 'vacation' %></td>
-          <td><%= vacation.vacation? ? vacation.workdays_in_range(vacation.offset) : 1 %></td>
-          <td><%= vacation.offset %></td>
-        </tr>
-        <% end %>
-      </tbody>
-    </table>
-    <table class="table table-hover future_vacations">
-      <thead>
-        <tr>
-          <th>Vacation type</th>
-          <th>Vacation period</th>
-          <th>(Days)</th>
-          <th>offset</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @user.vacations.future.each do |vacation| %>
-        <tr>
-          <td><%= link_to vacation.vacation_type, vacation, class: 'show_vacation', remote: true %></td>
-          <td><%= vacation.start_time.strftime("%A, %b %d") %> <%= '- ' + vacation.end_time.strftime("%A, %b %d") if vacation.vacation_type == 'vacation' %></td>
-          <td><%= vacation.vacation? ? vacation.workdays_in_range(vacation.offset) : 1 %></td>
-          <td><%= vacation.offset %></td>
-        </tr>
-        <% end %>
-      </tbody>
-    </table>
+    <div class="vacations">
+      <ul class="nav nav-tabs">
+        <li role="presentation" id="to_past"><%= link_to "Past #{ @user.vacations.past.count }", '', class: 'to_past', remote: true %></li>
+        <li role="presentation" id="to_future" class="active"><%= link_to "Future #{ @user.vacations.future.count }", '', class: 'to_future', remote: true %></li>
+      </ul>
+      <table class="table table-hover past_vacations" style="display: none;">
+        <thead>
+          <tr>
+            <th>Vacation type</th>
+            <th>Vacation period</th>
+            <th>(Days)</th>
+            <th>offset</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @user.vacations.past.each do |vacation| %>
+          <tr>
+            <td><%= link_to vacation.vacation_type, vacation, class: 'show_vacation', remote: true %></td>
+            <td><%= vacation.start_time.strftime("%A, %b %d") %> <%= '- ' + vacation.end_time.strftime("%A, %b %d") if vacation.vacation_type == 'vacation' %></td>
+            <td><%= vacation.vacation? ? vacation.workdays_in_range(vacation.offset) : 1 %></td>
+            <td><%= vacation.offset %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <table class="table table-hover future_vacations">
+        <thead>
+          <tr>
+            <th>Vacation type</th>
+            <th>Vacation period</th>
+            <th>(Days)</th>
+            <th>offset</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @user.vacations.future.each do |vacation| %>
+          <tr>
+            <td><%= link_to vacation.vacation_type, vacation, class: 'show_vacation', remote: true %></td>
+            <td><%= vacation.start_time.strftime("%A, %b %d") %> <%= '- ' + vacation.end_time.strftime("%A, %b %d") if vacation.vacation_type == 'vacation' %></td>
+            <td><%= vacation.vacation? ? vacation.workdays_in_range(vacation.offset) : 1 %></td>
+            <td><%= vacation.offset %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
     <%= link_to 'Add vacation', new_user_vacation_path(@user), class: 'btn btn-success' %>
   </div>
 </div>

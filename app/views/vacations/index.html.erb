@@ -1,6 +1,15 @@
 <h1>Vacations</h1>
-<div class="row">
+<div class="row vert-offset-top-2">
+  <div class="col-md-4">
+    <%= link_to 'All', show_vacations_users_path(type: :all), class: 'btn btn-default btn-primary search_vacations', remote: true %>
+    <%= link_to 'Day offs', show_vacations_users_path(type: :day_off), class: 'btn btn-default search_vacations', remote: true %>
+    <%= link_to 'Vacations', show_vacations_users_path(type: :vacation), class: 'btn btn-default search_vacations', remote: true %>
+  </div>
+</div>
+<div class="row vert-offset-top-1">
   <div class="col-md-8">
+    <div class="vacations">
+
     <ul class="nav nav-tabs">
       <li role="presentation" id="to_past"><%= link_to "Past #{ @vacations.past.count }", '', class: 'to_past', remote: true %></li>
       <li role="presentation" id="to_future" class="active"><%= link_to "Future #{ @vacations.future.count }", '', class: 'to_future', remote: true %></li>
@@ -49,6 +58,7 @@
         <% end %>
       </tbody>
     </table>
+  </div>
   </div>
 </div>
 <div class="vacation"></div>
