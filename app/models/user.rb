@@ -29,13 +29,13 @@
 
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :registerable, :recoverable and :omniauthable
-  devise :database_authenticatable, :rememberable, :trackable, :validatable
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :rememberable, :trackable, :validatable, :registerable, :recoverable
 
   validates :first_name, :last_name, :start_date, presence: true
   validates :start_date, date: { before_or_equal_to: Date.today.beginning_of_day }
 
-  has_many :vacations
+  has_many :vacations, dependent: :destroy
 
   mount_uploader :avatar, AvatarUploader
 end
