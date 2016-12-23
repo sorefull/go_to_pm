@@ -7,6 +7,12 @@ class UsersController < ApplicationController
   def show
   end
 
+  def show_vacation
+    @user = User.find(params[:user_id])
+    @vacations = params[:type] == 'all' ? @user.vacations : @user.vacations.where(vacation_type: params[:type])
+    render partial: 'vacations'
+  end
+
   def new
     @user = User.new(start_date: Time.zone.now)
   end

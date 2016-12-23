@@ -23,6 +23,11 @@ class VacationsController < ApplicationController
     render partial: 'vacation'
   end
 
+  def show_vacation
+    @vacations = params[:type] == 'all' ? Vacation : Vacation.where(vacation_type: params[:type])
+    render partial: 'vacations'
+  end
+
   def destroy
     if @vacation.start_time > Date.today
       @vacation.destroy_vacation
