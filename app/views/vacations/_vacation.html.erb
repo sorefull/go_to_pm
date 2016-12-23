@@ -37,16 +37,32 @@
           </div>
 
           <% if @vacation.vacation_type == 'vacation' %>
-          <div class="row">
-            <div class="col-md-12">
-              <b>
-                End time:
-              </b>
+          <div class="vert-offset-top-1">
+            <div class="row">
+              <div class="col-md-12">
+                <b>
+                  Days:
+                </b>
+                <%= @vacation.vacation? ? @vacation.workdays_in_range(@vacation.offset) : 1 %>
+              </div>
+              <div class="col-md-12">
+                <b>
+                  Offset:
+                </b>
+                <%= @vacation.offset %>
+              </div>
             </div>
-            <div class="col-md-12">
-              <%= @vacation.end_time.strftime("%A, %b %d") %>
+            
+            <div class="row vert-offset-top-1">
+              <div class="col-md-12">
+                <b>
+                  End time:
+                </b>
+              </div>
+              <div class="col-md-12">
+                <%= @vacation.end_time.strftime("%A, %b %d") %>
+              </div>
             </div>
-          </div>
           <% end %>
 
           <% if @vacation.comment != '' %>
@@ -61,6 +77,12 @@
             </div>
           </div>
           <% end %>
+
+          <div class="row vert-offset-top-1">
+            <div class="col-md-12">
+              <%= link_to 'Delete vacation', @vacation, method: :delete, class: 'btn btn-danger' %>
+            </div>
+          </div>
         </div>
       </div>
     </div>

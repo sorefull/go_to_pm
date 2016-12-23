@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   resources :users do
     collection do
-      resources :vacations, only: [:index, :show]
+      resources :vacations, only: [:index, :show, :destroy]
     end
     resources :vacations, only: [:new, :create] # :destroy
   end

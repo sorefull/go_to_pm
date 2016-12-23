@@ -1,5 +1,5 @@
 class VacationsController < ApplicationController
-  before_action :set_vacation, only: [:show] # :destroy
+  before_action :set_vacation, only: [:show, :destroy]
   before_action :set_user, only: [:new, :create]
 
   def index
@@ -23,12 +23,14 @@ class VacationsController < ApplicationController
     render partial: 'vacation'
   end
 
-  # def destroy
-  #   @vacation.destroy
-  #   redirect_to @vacation.user, notice: 'Vacation was destroyed'
-  #   @user.destroy
-  #   redirect_to @user, notice: "#{@user.first_name} was destroyed!"
-  # end
+  def destroy
+    if @vacation.start_time > Date.today
+      @vacation.destroy_vacation
+      redirect_to @vacation.user, notice: 'Vacation was destroyed'
+    else
+      redirect_to @vacation.user, alert: 'You only can delete future vacations'
+    end
+  end
 
   private
   def vacation_params
