@@ -38,4 +38,6 @@ class User < ApplicationRecord
   has_many :vacations, dependent: :destroy
 
   mount_uploader :avatar, AvatarUploader
+
+  enum role: [:user, :admin]
 end

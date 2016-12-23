@@ -25,13 +25,16 @@
           <% end %>
           <% unless controller_name == 'sessions' %>
             <ul class="nav navbar-nav navbar-right">
-              <li>
                 <% if user_signed_in? %>
+                <li><%= link_to 'Edit my account', edit_user_registration_path %></li>
+                <li>
                   <%= link_to 'Log out', destroy_user_session_path, method: :delete %>
+                </li>
                 <% else %>
+                <li>
                   <%= link_to 'Log in', new_user_session_path %>
+                </li>
                 <% end %>
-              </li>
             </ul>
           <% end %>
         </div>
