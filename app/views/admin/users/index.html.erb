@@ -14,7 +14,7 @@
       <tbody>
         <% @users.each do |user| %>
           <tr>
-            <td><%= link_to "#{user.first_name} #{user.last_name}", user %></td>
+            <td><%= link_to "#{user.first_name} #{user.last_name}", [:admin, user] %></td>
             <td><%= user.email %></td>
             <td><%= user.phone_number %></td>
             <td><%= user.vacation_count %></td>
@@ -23,6 +23,6 @@
         <% end %>
       </tbody>
     </table>
-    <%= link_to 'New user', new_user_path, class: 'btn btn-success' %>
+    <%= link_to 'New user', new_admin_user_path, class: 'btn btn-success' %>
   </div>
 </div>

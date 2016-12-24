@@ -16,10 +16,10 @@
           <% if user_signed_in? %>
             <ul class="nav navbar-nav">
                 <li>
-                    <%= link_to 'Users', users_path %>
+                    <%= link_to 'Users', admin_users_path %>
                 </li>
                 <li>
-                  <%= link_to 'Vacations', vacations_path %>
+                  <%= link_to 'Vacations', admin_vacations_path %>
                 </li>
             </ul>
           <% end %>

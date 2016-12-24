@@ -2,8 +2,8 @@
   <div class="col-md-2">
     <%= image_tag @user.avatar.thumb.url, class: 'img-rounded' %>
     <p class="vert-offset-top-1">
-      <%= link_to 'Edit', edit_user_path(@user), class: 'btn btn-primary' %>
-      <%= link_to 'Delete', @user, method: :Delete, class: 'btn btn-danger' %>
+      <%= link_to 'Edit', edit_admin_user_path(@user), class: 'btn btn-primary' %>
+      <%= link_to 'Delete', [:admin, @user], method: :Delete, class: 'btn btn-danger' %>
     </p>
   </div>
 
@@ -117,9 +117,9 @@
 </div>
 <div class="row vert-offset-top-2">
   <div class="col-md-4">
-    <%= link_to 'All', user_show_vacations_path(@user, type: :all), class: 'btn btn-default btn-primary search_vacations', remote: true %>
-    <%= link_to 'Day offs', user_show_vacations_path(@user, type: :day_off), class: 'btn btn-default search_vacations', remote: true %>
-    <%= link_to 'Vacations', user_show_vacations_path(@user, type: :vacation), class: 'btn btn-default search_vacations', remote: true %>
+    <%= link_to 'All', admin_user_show_vacations_path(@user, type: :all), class: 'btn btn-default btn-primary search_vacations', remote: true %>
+    <%= link_to 'Day offs', admin_user_show_vacations_path(@user, type: :day_off), class: 'btn btn-default search_vacations', remote: true %>
+    <%= link_to 'Vacations', admin_user_show_vacations_path(@user, type: :vacation), class: 'btn btn-default search_vacations', remote: true %>
   </div>
 </div>
 <div class="row vert-offset-top-2">
@@ -141,7 +141,7 @@
         <tbody>
           <% @user.vacations.past.each do |vacation| %>
           <tr>
-            <td><%= link_to vacation.vacation_type, vacation, class: 'show_vacation', remote: true %></td>
+            <td><%= link_to vacation.vacation_type, [:admin, vacation], class: 'show_vacation', remote: true %></td>
             <td><%= vacation.start_time.strftime("%A, %b %d") %> <%= '- ' + vacation.end_time.strftime("%A, %b %d") if vacation.vacation_type == 'vacation' %></td>
             <td><%= vacation.vacation? ? vacation.workdays_in_range(vacation.offset) : 1 %></td>
             <td><%= vacation.offset %></td>
@@ -161,7 +161,7 @@
         <tbody>
           <% @user.vacations.future.each do |vacation| %>
           <tr>
-            <td><%= link_to vacation.vacation_type, vacation, class: 'show_vacation', remote: true %></td>
+            <td><%= link_to vacation.vacation_type, [:admin, vacation], class: 'show_vacation', remote: true %></td>
             <td><%= vacation.start_time.strftime("%A, %b %d") %> <%= '- ' + vacation.end_time.strftime("%A, %b %d") if vacation.vacation_type == 'vacation' %></td>
             <td><%= vacation.vacation? ? vacation.workdays_in_range(vacation.offset) : 1 %></td>
             <td><%= vacation.offset %></td>
@@ -170,7 +170,7 @@
         </tbody>
       </table>
     </div>
-    <%= link_to 'Add vacation', new_user_vacation_path(@user), class: 'btn btn-success' %>
+    <%= link_to 'Add vacation', new_admin_user_vacation_path(@user), class: 'btn btn-success' %>
   </div>
 </div>
 <div class="vacation"></div>

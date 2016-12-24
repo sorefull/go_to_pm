@@ -52,7 +52,7 @@
                 <%= @vacation.offset %>
               </div>
             </div>
-            
+
             <div class="row vert-offset-top-1">
               <div class="col-md-12">
                 <b>
@@ -80,7 +80,7 @@
 
           <div class="row vert-offset-top-1">
             <div class="col-md-12">
-              <%= link_to 'Delete vacation', @vacation, method: :delete, class: 'btn btn-danger' %>
+              <%= link_to 'Delete vacation', [:admin, @vacation], method: :delete, class: 'btn btn-danger' %>
             </div>
           </div>
         </div>
