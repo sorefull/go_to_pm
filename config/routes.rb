@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       resources :vacations, only: [:new, :create]
       get 'show_vacations', to: 'users#show_vacation', as: 'show_vacations'
     end
+    resources :invitations, only: [:index, :new, :create, :destroy]
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

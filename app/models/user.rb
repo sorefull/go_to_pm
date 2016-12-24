@@ -40,4 +40,11 @@ class User < ApplicationRecord
   mount_uploader :avatar, AvatarUploader
 
   enum role: [:user, :admin]
+
+  attr_accessor :secure_key
+  before_validation :check_invitaion, on: :create
+  def check_invitaion
+    self.start_date = Date.today
+    errors.add(:invitation, 'not found') unless Invitation.find_by(secure_key: @secure_key) || User.count == 0
+  end
 end

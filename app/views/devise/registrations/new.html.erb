@@ -6,6 +6,7 @@
   <div class="panel-body">
     <%= bootstrap_form_for(resource, :as => resource_name, :url => registration_path(resource_name), html: { role: "form" }) do |f| %>
         <%= f.email_field :email, autofocus: true, class: "form-control" %>
+        <%= f.hidden_field :secure_key, value: params[:secure_key] %>
         <%= f.text_field :first_name %>
         <%= f.text_field :last_name %>
         <%= f.text_field :skype_username %>
