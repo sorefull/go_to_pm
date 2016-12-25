@@ -15,15 +15,23 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <% if user_signed_in? %>
             <ul class="nav navbar-nav">
-                <li>
-                    <%= link_to 'Users', admin_users_path %>
-                </li>
-                <li>
-                  <%= link_to 'Vacations', admin_vacations_path %>
-                </li>
-                <li>
-                  <%= link_to 'Invitations', admin_invitations_path %>
-                </li>
+              <li>
+                <%= link_to 'My account', current_user %>
+              </li>
+              <li>
+                <%= link_to 'Users', users_path %>
+              </li>
+                <% if current_user.admin? %>
+                  <li>
+                      <%= link_to 'Users', admin_users_path, style: 'color: red;' %>
+                  </li>
+                  <li>
+                    <%= link_to 'Vacations', admin_vacations_path, style: 'color: red;' %>
+                  </li>
+                  <li>
+                    <%= link_to 'Invitations', admin_invitations_path, style: 'color: red;' %>
+                  </li>
+                <% end %>
             </ul>
           <% end %>
           <% unless controller_name == 'sessions' %>
