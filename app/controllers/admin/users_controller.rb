@@ -19,7 +19,7 @@ module Admin
     end
 
     def create
-      @user = User.create(user_params.merge(password: SecureRandom.hex(10)))
+      @user = User.create(user_params.merge(source: :admin,password: SecureRandom.hex(10)))
       if @user.save
         redirect_to [:admin, @user], notice: 'User was sucessfuly created'
       else

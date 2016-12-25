@@ -25,6 +25,7 @@
 #  day_off_count          :integer          default("0"), not null
 #  avatar                 :string
 #  comment                :text
+#  role                   :integer          default("0"), not null
 #
 
 class User < ApplicationRecord
@@ -42,9 +43,10 @@ class User < ApplicationRecord
   enum role: [:user, :admin]
 
   attr_accessor :secure_key
+  attr_accessor :source
   before_validation :check_invitaion, on: :create
   def check_invitaion
     self.start_date = Date.today
-    errors.add(:invitation, 'not found') unless Invitation.find_by(secure_key: @secure_key) || User.count == 0
+    errors.add(:invitation, 'not found') unless Invitation.find_by(secure_key: @secure_key) || User.count == 0 || self.source != 'admin'
   end
 end

@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :users do
       collection do
-        resources :vacations, only: [:index, :show, :destroy]
+        resources :vacations, only: [:index, :show, :destroy, :update]
+        get 'request/:id', to: 'vacations#request_show', as: 'request'
+        get 'requests', to: 'vacations#requests', as: 'requests'
         get 'show_vacations', to: 'vacations#show_vacation', as: 'show_vacations'
       end
       resources :vacations, only: [:new, :create]
@@ -17,6 +19,7 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [:index, :show]
-  resources :vacations, only: [:show]
+  resources :vacations, only: [:show, :new, :create]
+  get 'requests', to: 'vacations#requests', as: 'requests'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

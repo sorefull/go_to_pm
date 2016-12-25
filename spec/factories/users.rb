@@ -25,6 +25,7 @@
 #  day_off_count          :integer          default("0"), not null
 #  avatar                 :string
 #  comment                :text
+#  role                   :integer          default("0"), not null
 #
 
 FactoryGirl.define do

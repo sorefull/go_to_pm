@@ -1,0 +1,35 @@
+<div class="row vert-offset-top-1">
+  <div class="col-md-8">
+    <div class="row">
+      <div class="col-md-7">
+        <h1>My Requests</h1>
+      </div>
+      <div class="col-md-2 col-md-offset-3 vert-offset-top-2">
+        <%= link_to 'New vacation', new_vacation_path, class: 'btn btn-success' %>
+      </div>
+    </div>
+    <div class="vacations">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Vacation type</th>
+            <th>Vacation period</th>
+            <th>(Days)</th>
+            <th>Offset</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @vacations.each do |vacation| %>
+          <tr>
+            <td><%= link_to vacation.vacation_type, vacation, class: 'show_vacation', remote: true %></td>
+            <td><%= vacation.start_time.strftime("%A, %b %d") %> <%= '- ' + vacation.end_time.strftime("%A, %b %d") if vacation.vacation_type == 'vacation' %></td>
+            <td><%= vacation.vacation? ? vacation.workdays_in_range(vacation.offset) : 1 %></td>
+            <td><%= vacation.offset %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="vacation"></div>

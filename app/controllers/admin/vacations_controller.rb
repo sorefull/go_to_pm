@@ -1,10 +1,14 @@
 module Admin
   class VacationsController < ApplicationController
-    before_action :set_vacation, only: [:show, :destroy]
+    before_action :set_vacation, only: [:show, :destroy, :update, :request_show]
     before_action :set_user, only: [:new, :create]
 
     def index
-      @vacations = Vacation.all
+      @vacations = Vacation.where(status: 1)
+    end
+
+    def requests
+      @vacations = Vacation.where(status: 0)
     end
 
     def new
@@ -12,7 +16,7 @@ module Admin
     end
 
     def create
-      @vacation = @user.vacations.build(vacation_params)
+      @vacation = @user.vacations.build(vacation_params.merge(status: 1))
       if @vacation.save
         redirect_to [:admin, @user], notice: 'Vacation was sucessfuly created'
       else
@@ -22,6 +26,10 @@ module Admin
 
     def show
       render partial: 'vacation'
+    end
+
+    def request_show
+      render partial: 'request'
     end
 
     def show_vacation
@@ -36,6 +44,11 @@ module Admin
       else
         redirect_to [:admin, @vacation.user], alert: 'You only can delete future vacations'
       end
+    end
+
+    def update
+      @vacation.approved!
+      redirect_to requests_admin_users_path, notice: 'Vacation was approved'
     end
 
     private

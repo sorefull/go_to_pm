@@ -19,7 +19,7 @@
                 <%= link_to 'My account', current_user %>
               </li>
               <li>
-                <%= link_to 'Users', users_path %>
+                <%= link_to 'My requests', requests_path %>
               </li>
                 <% if current_user.admin? %>
                   <li>
@@ -29,8 +29,15 @@
                     <%= link_to 'Vacations', admin_vacations_path, style: 'color: red;' %>
                   </li>
                   <li>
+                    <%= link_to 'Requests', requests_admin_users_path, style: 'color: red;' %>
+                  </li>
+                  <li>
                     <%= link_to 'Invitations', admin_invitations_path, style: 'color: red;' %>
                   </li>
+                <% else %>
+                <li>
+                  <%= link_to 'Users', users_path %>
+                </li>
                 <% end %>
             </ul>
           <% end %>
