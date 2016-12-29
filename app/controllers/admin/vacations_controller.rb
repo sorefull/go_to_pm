@@ -5,18 +5,22 @@ module Admin
 
     def index
       @vacations = Vacation.where(status: 1)
+      authorize [:admin, @vacations]
     end
 
     def requests
       @vacations = Vacation.where(status: 0)
+      authorize [:admin, @vacation]
     end
 
     def new
       @vacation = @user.vacations.build(offset: 0)
+      authorize [:admin, @vacation]
     end
 
     def create
       @vacation = @user.vacations.build(vacation_params.merge(status: 1))
+      authorize [:admin, @vacation]
       if @vacation.save
         redirect_to [:admin, @user], notice: 'Vacation was sucessfuly created'
       else
@@ -25,19 +29,23 @@ module Admin
     end
 
     def show
+      authorize [:admin, @vacation]
       render partial: 'vacation'
     end
 
     def request_show
+      authorize [:admin, @vacation]
       render partial: 'request'
     end
 
     def show_vacation
       @vacations = params[:type] == 'all' ? Vacation : Vacation.where(vacation_type: params[:type])
+      authorize [:admin, @vacations]
       render partial: 'vacations'
     end
 
     def destroy
+      authorize [:admin, @vacation]
       if @vacation.start_time > Date.today
         @vacation.destroy_vacation
         redirect_to [:admin, @vacation.user], notice: 'Vacation was destroyed'
@@ -47,6 +55,7 @@ module Admin
     end
 
     def update
+      authorize [:admin, @vacation]
       @vacation.approved!
       redirect_to requests_admin_users_path, notice: 'Vacation was approved'
     end
