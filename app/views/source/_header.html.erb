@@ -24,6 +24,9 @@
               <li>
                 <%= link_to 'Users', users_path %>
               </li>
+              <li>
+                <%= link_to 'Notifications', notifications_path %>
+              </li>
               <% if policy([:admin, :user]).index? %>
                 <li>
                     <%= link_to 'Users', admin_users_path, style: 'color: red;' %>

@@ -1,0 +1,10 @@
+<% @notifications.each do |notification| %>
+  <!-- <div class="panel panel-<%= notification.status %>">
+    <div class="panel-heading"><%= notification.body %></div>
+  </div> -->
+  <div class="alert alert-<%= notification.status %> alert-dismissable">
+    <!-- <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> -->
+    <%= link_to "x", notification, method: :delete, class: 'close', remote: true %>
+    <%= notification.body %>
+  </div>
+<% end %>

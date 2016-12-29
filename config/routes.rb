@@ -18,7 +18,12 @@ Rails.application.routes.draw do
     resources :invitations, only: [:index, :new, :create, :destroy]
   end
 
-  resources :users, only: [:index, :show]
+  resources :users, only: [:index, :show] do
+    collection do
+      resources :notifications, only: [:index, :destroy]
+    end
+  end
+
   resources :vacations, only: [:show, :new, :create]
   get 'requests', to: 'vacations#requests', as: 'requests'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

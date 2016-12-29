@@ -37,6 +37,7 @@ class User < ApplicationRecord
   validates :start_date, date: { before_or_equal_to: Date.today.beginning_of_day }
 
   has_many :vacations, dependent: :destroy
+  has_many :notifications, dependent: :destroy
 
   mount_uploader :avatar, AvatarUploader
 

@@ -20,8 +20,7 @@ module Admin
 
     def create
       @vacation = @user.vacations.build(vacation_params.merge(status: 1))
-      authorize [:admin, @vacation]
-      if @vacation.save
+      if authorize [:admin, @vacation] && @vacation.save
         redirect_to [:admin, @user], notice: 'Vacation was sucessfuly created'
       else
         render 'new'
@@ -45,19 +44,23 @@ module Admin
     end
 
     def destroy
-      authorize [:admin, @vacation]
-      if @vacation.start_time > Date.today
-        @vacation.destroy_vacation
-        redirect_to [:admin, @vacation.user], notice: 'Vacation was destroyed'
-      else
-        redirect_to [:admin, @vacation.user], alert: 'You only can delete future vacations'
+      if authorize [:admin, @vacation]
+        if @vacation.start_time > Date.today || @vacation.unapproved?
+          @vacation.destroy_vacation
+          @vacation.user.notifications.create(body: "Your requestr for #{@vacation.vacation_type} in #{ @vacation.start_time.strftime("%A, %b %d")}#{ ' - ' +  @vacation.end_time.strftime("%A, %b %d") if @vacation.vacation_type == 'vacation' } was canceled!")
+          redirect_to [:admin, @vacation.user], notice: 'Vacation was destroyed'
+        else
+          redirect_to [:admin, @vacation.user], alert: 'You only can delete future vacations'
+        end
       end
     end
 
     def update
-      authorize [:admin, @vacation]
-      @vacation.approved!
-      redirect_to requests_admin_users_path, notice: 'Vacation was approved'
+      if authorize [:admin, @vacation]
+        @vacation.approved!
+        @vacation.user.notifications.create(body: "Your requestr for #{@vacation.vacation_type} in #{ @vacation.start_time.strftime("%A, %b %d")}#{ ' - ' +  @vacation.end_time.strftime("%A, %b %d") if @vacation.vacation_type == 'vacation' } was approved!")
+        redirect_to requests_admin_users_path, notice: 'Vacation was approved'
+      end
     end
 
     private
