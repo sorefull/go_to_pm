@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="col-md-8">
+    <div class="row">
+      <div class="col-md-3">
+        <h1>INvitations</h1>
+      </div>
+      <div class="col-md-1 col-md-offset-7 vert-offset-top-2">
+        <%= link_to 'Invite User', new_admin_invitation_path, class: 'btn btn-success new_invitation', remote: true %>
+      </div>
+    </div>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Email</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @invitations.each do |invitation| %>
+          <tr>
+            <td><%= invitation.email %></td>
+            <% if invitation.user %>
+              <td><%= link_to "#{invitation.user.first_name} #{invitation.user.last_name}", [:admin, invitation.user] %></td>
+            <% else %>
+              <td>Not registered yet</td>
+            <% end %>
+            <td><%= link_to 'Detete invitation', [:admin, invitation], method: :delete, style: 'color: red;' %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="invitation"></div>

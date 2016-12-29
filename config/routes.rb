@@ -1,15 +1,30 @@
 Rails.application.routes.draw do
+
   get '', to: 'statics#landing', as: 'landing'
 
   devise_for :users
 
-  resources :users do
-    collection do
-      resources :vacations, only: [:index, :show, :destroy]
-      get 'show_vacations', to: 'vacations#show_vacation', as: 'show_vacations' 
+  namespace :admin do
+    resources :users do
+      collection do
+        resources :vacations, only: [:index, :show, :destroy, :update]
+        get 'request/:id', to: 'vacations#request_show', as: 'request'
+        get 'requests', to: 'vacations#requests', as: 'requests'
+        get 'show_vacations', to: 'vacations#show_vacation', as: 'show_vacations'
+      end
+      resources :vacations, only: [:new, :create]
+      get 'show_vacations', to: 'users#show_vacation', as: 'show_vacations'
     end
-    resources :vacations, only: [:new, :create]
-    get 'show_vacations', to: 'users#show_vacation', as: 'show_vacations'
+    resources :invitations, only: [:index, :new, :create, :destroy]
   end
+
+  resources :users, only: [:index, :show] do
+    collection do
+      resources :notifications, only: [:index, :destroy]
+    end
+  end
+
+  resources :vacations, only: [:show, :new, :create]
+  get 'requests', to: 'vacations#requests', as: 'requests'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

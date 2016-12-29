@@ -1,0 +1,34 @@
+<div class="row">
+  <div class="col-md-8">
+    <div class="row">
+      <div class="col-md-3">
+        <h1>Users</h1>
+      </div>
+      <div class="col-md-1 col-md-offset-7 vert-offset-top-2">
+        <%= link_to 'New user', new_admin_user_path, class: 'btn btn-success' %>
+      </div>
+    </div>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>User name</th>
+          <th>Email</th>
+          <th>Phone number</th>
+          <th>A.V.</th>
+          <th>A.D.</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= link_to "#{user.first_name} #{user.last_name}", [:admin, user] %></td>
+            <td><%= user.email %></td>
+            <td><%= user.phone_number %></td>
+            <td><%= user.vacation_count %></td>
+            <td><%= user.day_off_count %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+<div class="modal fade" tabindex="-1" role="dialog" id="my_modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <%= bootstrap_form_for [:admin, @invitation] do |f| %>
+        <%= f.email_field :email %>
+        <%= f.submit :send %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

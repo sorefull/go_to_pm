@@ -1,9 +1,9 @@
 <h1>Vacations</h1>
 <div class="row vert-offset-top-2">
   <div class="col-md-4">
-    <%= link_to 'All', show_vacations_users_path(type: :all), class: 'btn btn-default btn-primary search_vacations', remote: true %>
-    <%= link_to 'Day offs', show_vacations_users_path(type: :day_off), class: 'btn btn-default search_vacations', remote: true %>
-    <%= link_to 'Vacations', show_vacations_users_path(type: :vacation), class: 'btn btn-default search_vacations', remote: true %>
+    <%= link_to 'All', show_vacations_admin_users_path(type: :all), class: 'btn btn-default btn-primary search_vacations', remote: true %>
+    <%= link_to 'Day offs', show_vacations_admin_users_path(type: :day_off), class: 'btn btn-default search_vacations', remote: true %>
+    <%= link_to 'Vacations', show_vacations_admin_users_path(type: :vacation), class: 'btn btn-default search_vacations', remote: true %>
   </div>
 </div>
 <div class="row vert-offset-top-1">
@@ -27,8 +27,8 @@
       <tbody>
         <% @vacations.past.each do |vacation| %>
         <tr>
-          <td><%= link_to "#{vacation.user.first_name} #{vacation.user.last_name}", vacation.user %></td>
-          <td><%= link_to vacation.vacation_type, vacation, class: 'show_vacation', remote: true %></td>
+          <td><%= link_to "#{vacation.user.first_name} #{vacation.user.last_name}", [:admin, vacation.user] %></td>
+          <td><%= link_to vacation.vacation_type, [:admin, vacation], class: 'show_vacation', remote: true %></td>
           <td><%= vacation.start_time.strftime("%A, %b %d") %> <%= '- ' + vacation.end_time.strftime("%A, %b %d") if vacation.vacation_type == 'vacation' %></td>
           <td><%= vacation.vacation? ? vacation.workdays_in_range(vacation.offset) : 1 %></td>
           <td><%= vacation.offset %></td>
@@ -49,8 +49,8 @@
       <tbody>
         <% @vacations.future.each do |vacation| %>
         <tr>
-          <td><%= link_to "#{vacation.user.first_name} #{vacation.user.last_name}", vacation.user %></td>
-          <td><%= link_to vacation.vacation_type, vacation, class: 'show_vacation', remote: true %></td>
+          <td><%= link_to "#{vacation.user.first_name} #{vacation.user.last_name}", [:admin, vacation.user] %></td>
+          <td><%= link_to vacation.vacation_type, [:admin, vacation], class: 'show_vacation', remote: true %></td>
           <td><%= vacation.start_time.strftime("%A, %b %d") %> <%= '- ' + vacation.end_time.strftime("%A, %b %d") if vacation.vacation_type == 'vacation' %></td>
           <td><%= vacation.vacation? ? vacation.workdays_in_range(vacation.offset) : 1 %></td>
           <td><%= vacation.offset %></td>

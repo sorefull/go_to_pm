@@ -25,17 +25,29 @@
 #  day_off_count          :integer          default("0"), not null
 #  avatar                 :string
 #  comment                :text
+#  role                   :integer          default("0"), not null
 #
 
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :registerable, :recoverable and :omniauthable
-  devise :database_authenticatable, :rememberable, :trackable, :validatable
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :rememberable, :trackable, :validatable, :registerable, :recoverable
 
   validates :first_name, :last_name, :start_date, presence: true
   validates :start_date, date: { before_or_equal_to: Date.today.beginning_of_day }
 
-  has_many :vacations
+  has_many :vacations, dependent: :destroy
+  has_many :notifications, dependent: :destroy
 
   mount_uploader :avatar, AvatarUploader
+
+  enum role: [:user, :admin]
+
+  attr_accessor :secure_key
+  attr_accessor :source
+  before_validation :check_invitaion, on: :create
+  def check_invitaion
+    self.start_date = Date.today
+    errors.add(:invitation, 'not found') unless Invitation.find_by(secure_key: @secure_key) || User.count == 0 || self.source != 'admin'
+  end
 end
