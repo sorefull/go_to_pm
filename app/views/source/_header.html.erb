@@ -22,20 +22,28 @@
                 <%= link_to 'My requests', requests_path %>
               </li>
               <li>
-                  <%= link_to 'Users', admin_users_path, style: 'color: red;' %>
-              </li>
-              <li>
-                <%= link_to 'Vacations', admin_vacations_path, style: 'color: red;' %>
-              </li>
-              <li>
-                <%= link_to 'Requests', requests_admin_users_path, style: 'color: red;' %>
-              </li>
-              <li>
-                <%= link_to 'Invitations', admin_invitations_path, style: 'color: red;' %>
-              </li>
-              <li>
                 <%= link_to 'Users', users_path %>
               </li>
+              <% if policy([:admin, :user]).index? %>
+                <li>
+                    <%= link_to 'Users', admin_users_path, style: 'color: red;' %>
+                </li>
+              <% end %>
+              <% if policy([:admin, :vacation]).index? %>
+                <li>
+                  <%= link_to 'Vacations', admin_vacations_path, style: 'color: red;' %>
+                </li>
+              <% end %>
+              <% if policy([:admin, :vacation]).requests? %>
+                <li>
+                  <%= link_to 'Requests', requests_admin_users_path, style: 'color: red;' %>
+                </li>
+              <% end %>
+              <% if policy([:admin, :invitation]).index? %>
+                <li>
+                  <%= link_to 'Invitations', admin_invitations_path, style: 'color: red;' %>
+                </li>
+              <% end %>
             </ul>
           <% end %>
           <% unless controller_name == 'sessions' %>

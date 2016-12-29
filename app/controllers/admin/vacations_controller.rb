@@ -10,7 +10,7 @@ module Admin
 
     def requests
       @vacations = Vacation.where(status: 0)
-      authorize [:admin, @vacation]
+      authorize [:admin, @vacations]
     end
 
     def new
