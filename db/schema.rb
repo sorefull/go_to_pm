@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161229151419) do
+ActiveRecord::Schema.define(version: 20161230085902) do
 
   create_table "invitations", force: :cascade do |t|
     t.string   "secure_key"
@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(version: 20161229151419) do
     t.datetime "updated_at",                null: false
     t.integer  "offset",        default: 0, null: false
     t.integer  "status",        default: 0, null: false
+    t.text     "admin_comment"
     t.index ["user_id"], name: "index_vacations_on_user_id"
   end
 
