@@ -16,6 +16,7 @@
 
 FactoryGirl.define do
   factory :vacation do
+    status 1
     trait :future_vacation do
       start_time Faker::Date.forward(15)
       end_time Faker::Date.forward(15) + 15.day

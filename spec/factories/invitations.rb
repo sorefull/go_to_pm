@@ -11,7 +11,6 @@
 
 FactoryGirl.define do
   factory :invitation do
-    secure_key "MyString"
-    email "MyString"
+    email Faker::Internet.email
   end
 end

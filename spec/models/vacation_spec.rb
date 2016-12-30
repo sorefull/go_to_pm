@@ -22,6 +22,7 @@ RSpec.describe Vacation, type: :model do
 
   context "if vacation" do
     before { allow(subject).to receive(:vacation?).and_return(false) }
+    before { allow(subject).to receive(:approved?).and_return(false) }
     it { should_not validate_presence_of(:end_time) }
   end
 

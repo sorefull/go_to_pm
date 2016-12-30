@@ -19,7 +19,7 @@ class Invitation < ApplicationRecord
 
   after_create :send_invitation_email
   def send_invitation_email
-   UserMailer.send_invitation(self).deliver_now
+   UserMailer.send_invitation(self).deliver_now unless ENV['RAILS_ENV'] == 'test'
   end
 
   has_one :user, foreign_key: :email, primary_key: :email, class_name: 'User'
