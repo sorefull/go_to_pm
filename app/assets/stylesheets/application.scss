@@ -12,3 +12,14 @@
     margin-bottom: #{$i}em;
   }
 }
+
+.notification {
+  border-radius: 13px;
+  background-color: red;
+  padding: 3px 8px;
+  color: white;
+}
+
+.admin {
+  color: red !important;
+}

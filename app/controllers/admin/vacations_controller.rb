@@ -47,7 +47,7 @@ module Admin
       if authorize [:admin, @vacation]
         if @vacation.start_time > Date.today || @vacation.unapproved?
           @vacation.destroy_vacation
-          @vacation.user.notifications.create(body: "Your requestr for #{@vacation.vacation_type} in #{ @vacation.start_time.strftime("%A, %b %d")}#{ ' - ' +  @vacation.end_time.strftime("%A, %b %d") if @vacation.vacation_type == 'vacation' } was canceled!")
+          @vacation.user.notifications.create(body: "Your requestr for #{@vacation.vacation_type} in #{ @vacation.start_time.strftime("%A, %b %d")}#{ ' - ' +  @vacation.end_time.strftime("%A, %b %d") if @vacation.vacation_type == 'vacation' } was canceled!") unless params[:delete]
           redirect_to [:admin, @vacation.user], notice: 'Vacation was destroyed'
         else
           redirect_to [:admin, @vacation.user], alert: 'You only can delete future vacations'
@@ -56,16 +56,21 @@ module Admin
     end
 
     def update
-      if authorize [:admin, @vacation]
-        @vacation.approved!
-        @vacation.user.notifications.create(body: "Your requestr for #{@vacation.vacation_type} in #{ @vacation.start_time.strftime("%A, %b %d")}#{ ' - ' +  @vacation.end_time.strftime("%A, %b %d") if @vacation.vacation_type == 'vacation' } was approved!")
-        redirect_to requests_admin_users_path, notice: 'Vacation was approved'
+      if params[:delete]
+        @vacation.user.notifications.create(body: "Your requestr for #{@vacation.vacation_type} in #{ @vacation.start_time.strftime("%A, %b %d")}#{ ' - ' +  @vacation.end_time.strftime("%A, %b %d") if @vacation.vacation_type == 'vacation' } was canceled!#{ (' Comment: ' + vacation_params[:admin_comment]) if vacation_params[:admin_comment] != '' }")
+        destroy
+      else
+        if authorize [:admin, @vacation]
+          @vacation.update(vacation_params.merge(status: :approved))
+          @vacation.user.notifications.create(body: "Your requestr for #{@vacation.vacation_type} in #{ @vacation.start_time.strftime("%A, %b %d")}#{ ' - ' +  @vacation.end_time.strftime("%A, %b %d") if @vacation.vacation_type == 'vacation' } was approved!#{ (' Comment: ' + vacation_params[:admin_comment]) if vacation_params[:admin_comment] != '' }")
+          redirect_to requests_admin_users_path, notice: 'Vacation was approved'
+        end
       end
     end
 
     private
     def vacation_params
-      params.require(:vacation).permit(:vacation_type, :start_time, :end_time, :comment, :offset)
+      params.require(:vacation).permit(:vacation_type, :start_time, :end_time, :admin_comment, :offset)
     end
 
     def set_vacation
