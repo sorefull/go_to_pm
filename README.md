@@ -1,24 +1,37 @@
-# README
+# Go To ProjectManagement
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Hope this application will help you to manage your team. I made it to manage vacation activity in our team. Hope this will become a complicated CRM system in the nearest future.
 
-Things you may want to cover:
+![joke](https://raw.githubusercontent.com/sorefull/go_to_pm/master/public/images/readme.jpg)
 
-* Ruby version
+### As admin you can:
 
-* System dependencies
+* View your team's info
 
-* Configuration
+* View user's vacations, past and feature
 
-* Database creation
+* Edit user's information
 
-* Database initialization
+* Create new users
 
-* How to run the test suite
+* Invite new users by sending emails with registration link
 
-* Services (job queues, cache servers, search engines, etc.)
+* Create vacations and day-offs for existing users
 
-* Deployment instructions
+* Approve or cancel requests for vacation and day-offs
 
-* ...
+* Cancel user's future vacations
+
+### As user you can:
+
+* View your team's info
+
+* View user's vacations, past and feature
+
+* Edit youth profile info
+
+* Create requests for vacation and day-offs
+
+* Receive notifications of accepting or canceling requests
+
+P.S. Feel free to subscribe, clone and fork this application. Have fun it's Open Source!
