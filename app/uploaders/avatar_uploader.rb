@@ -34,7 +34,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
     process resize_to_fill: [180, 180]
 
     def default_url
-      "/images/thumb_missing.png"
+      '/images/thumb_missing.png'
     end
   end
 
@@ -51,7 +51,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   # end
 
   def default_url
-    "/images/missing.png"
+    '/images/missing.png'
   end
 
 end

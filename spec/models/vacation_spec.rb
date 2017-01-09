@@ -20,7 +20,7 @@ RSpec.describe Vacation, type: :model do
   it { should validate_presence_of(:vacation_type) }
   it { should validate_presence_of(:start_time) }
 
-  context "if vacation" do
+  context 'if vacation' do
     before { allow(subject).to receive(:vacation?).and_return(false) }
     before { allow(subject).to receive(:approved?).and_return(false) }
     it { should_not validate_presence_of(:end_time) }
@@ -32,7 +32,7 @@ RSpec.describe Vacation, type: :model do
     create(:user)
   end
 
-  context "vacation creation" do
+  context 'vacation creation' do
     let!(:vacation) do
       create(:vacation, :past_vacation, user: user)
     end
@@ -44,11 +44,11 @@ RSpec.describe Vacation, type: :model do
     end
   end
 
-  context "before save actions" do
+  context 'before save actions' do
     let!(:day_off_with_end_time) do
       create(:vacation, :past_day_off, end_time: Time.now, user: user)
     end
-    it "should cut end time if it is day_off" do
+    it 'should cut end time if it is day_off' do
       expect(day_off_with_end_time.end_time).to eq nil
     end
   end

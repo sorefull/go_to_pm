@@ -48,6 +48,6 @@ class User < ApplicationRecord
   before_validation :check_invitaion, on: :create
   def check_invitaion
     self.start_date = Date.today
-    errors.add(:invitation, 'not found') unless Invitation.find_by(secure_key: @secure_key) || User.count == 0 || self.source != 'admin'
+    errors.add(:invitation, 'not found') unless Invitation.find_by(secure_key: @secure_key) || User.count.zero? || source != 'admin'
   end
 end

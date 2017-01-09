@@ -16,7 +16,7 @@
 
 class Vacation < ApplicationRecord
   belongs_to :user
-  
+
   validates :vacation_type, :start_time, presence: true
   validates :end_time, presence: true, if: :vacation?
   # validates :start_time, date: { after_or_equal_to: Date.today.beginning_of_day }
@@ -26,12 +26,12 @@ class Vacation < ApplicationRecord
 
   before_save :set_users_counters_variables, if: :approved?
   def set_users_counters_variables
-    self.end_time = nil if self.day_off?
+    self.end_time = nil if day_off?
     user = User.find(self.user.id)
-    if self.vacation?
-      user.vacation_count -= self.workdays_in_range(self.offset)
+    if vacation?
+      user.vacation_count -= workdays_in_range
       user.save
-    elsif self.day_off?
+    elsif day_off?
       user.day_off_count -= 1
       user.save
     end
@@ -39,23 +39,23 @@ class Vacation < ApplicationRecord
 
   enum vacation_type: [:vacation, :day_off]
 
-  scope :past, -> { where("start_time < ? and status = 1", Date.today.beginning_of_day).order("start_time DESC") }
-  scope :future, -> { where("start_time >= ? and status = 1", Date.today.beginning_of_day).order("start_time ASC") }
+  scope :past, -> { where('start_time < ? and status = 1', Date.today.beginning_of_day).order('start_time DESC') }
+  scope :future, -> { where('start_time >= ? and status = 1', Date.today.beginning_of_day).order('start_time ASC') }
 
   # offset is a non sun&sut holidays in range
-  def workdays_in_range(offset=0)
-    self.end_time ? (self.start_time.to_date..self.end_time.to_date).select { |d| (1..5).include?(d.wday) }.size - self.offset : 1
+  def workdays_in_range
+    end_time ? (start_time.to_date..end_time.to_date).select { |d| (1..5).cover?(d.wday) }.size - offset : 1
   end
 
   def destroy_vacation
-    if self.vacation?
-      user.vacation_count += self.workdays_in_range(self.offset)
+    if vacation?
+      user.vacation_count += workdays_in_range
       user.save
-    elsif self.day_off?
+    elsif day_off?
       user.day_off_count += 1
       user.save
     end
-    self.destroy
+    destroy
   end
 
   enum status: [:unapproved, :approved]

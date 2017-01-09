@@ -27,7 +27,7 @@ FactoryGirl.define do
       vacation_type 1
     end
     trait :past_vacation do
-      start_time Faker::Date.backward(15) -15
+      start_time Faker::Date.backward(15) - 15
       end_time Faker::Date.backward(15)
       vacation_type 0
     end
