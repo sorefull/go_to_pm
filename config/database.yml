@@ -25,6 +25,6 @@ production:
   encoding: unicode
   database: blog_development
   pool: 5
-  username: oleg
-  password: go-to-pm-password
+  username: <%= ENV['DB_USERNAME'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
   host: localhost
