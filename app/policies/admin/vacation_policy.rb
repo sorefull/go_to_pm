@@ -40,7 +40,7 @@ module Admin
     end
 
     def destroy?
-      current_user_p.admin?
+      current_user_p.admin? && vacation[1].start_time > Date.today
     end
   end
 end
