@@ -20,7 +20,8 @@ module Admin
 
     def create
       @vacation = @user.vacations.build(vacation_params.merge(status: 1))
-      if authorize [:admin, @vacation] && @vacation.save
+      authorize [:admin, @vacation]
+      if @vacation.save
         redirect_to [:admin, @user], notice: 'Vacation was sucessfuly created'
       else
         render 'new'

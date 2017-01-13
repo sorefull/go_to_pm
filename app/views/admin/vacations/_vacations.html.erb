@@ -18,7 +18,7 @@
       <td><%= link_to "#{vacation.user.first_name} #{vacation.user.last_name}", [:admin, vacation.user] %></td>
       <td><%= link_to vacation.vacation_type, [:admin, vacation], class: 'show_vacation', remote: true %></td>
       <td><%= vacation.start_time.strftime("%A, %b %d") %> <%= '- ' + vacation.end_time.strftime("%A, %b %d") if vacation.vacation_type == 'vacation' %></td>
-      <td><%= vacation.vacation? ? vacation.workdays_in_range(vacation.offset) : 1 %></td>
+      <td><%= vacation.vacation? ? vacation.workdays_in_range : 1 %></td>
       <td><%= vacation.offset %></td>
     </tr>
     <% end %>
@@ -40,7 +40,7 @@
       <td><%= link_to "#{vacation.user.first_name} #{vacation.user.last_name}", [:admin, vacation.user] %></td>
       <td><%= link_to vacation.vacation_type, [:admin, vacation], class: 'show_vacation', remote: true %></td>
       <td><%= vacation.start_time.strftime("%A, %b %d") %> <%= '- ' + vacation.end_time.strftime("%A, %b %d") if vacation.vacation_type == 'vacation' %></td>
-      <td><%= vacation.vacation? ? vacation.workdays_in_range(vacation.offset) : 1 %></td>
+      <td><%= vacation.vacation? ? vacation.workdays_in_range : 1 %></td>
       <td><%= vacation.offset %></td>
     </tr>
     <% end %>

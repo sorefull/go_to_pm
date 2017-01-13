@@ -21,6 +21,12 @@ class VacationsController < ApplicationController
     end
   end
 
+  def destroy
+    @vacation = current_user.vacations.find(params[:id])
+    @vacation.destroy
+    redirect_to requests_path, alert: 'Request was sucessfuly deleted'    
+  end
+
   private
   def vacation_params
     params.require(:vacation).permit(:vacation_type, :start_time, :end_time, :comment, :offset)

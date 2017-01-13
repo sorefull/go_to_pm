@@ -24,7 +24,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :vacations, only: [:show, :new, :create]
+  resources :vacations, only: [:show, :new, :create, :destroy]
   get 'requests', to: 'vacations#requests', as: 'requests'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
