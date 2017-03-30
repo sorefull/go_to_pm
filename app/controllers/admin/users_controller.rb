@@ -49,7 +49,7 @@ module Admin
       if authorize [:admin, @user]
         @user.destroy
         FileUtils.rm_rf("public/uploads/user/avatar/#{@user.id}")
-        redirect_to admin_users_path, notice: "#{@user.first_name} was destroyed!"
+        redirect_to admin_users_path, notice: "#{@user.name} was destroyed!"
       else
         redirect_to admin_users_path, alert: 'You can not delete yourself'
       end
@@ -57,7 +57,7 @@ module Admin
 
     private
     def user_params
-      params.require(:user).permit(:email, :first_name, :last_name, :birth_date, :skype_username, :phone_number, :start_date, :avatar, :comment, :vacation_count, :day_off_count, :status)
+      params.require(:user).permit(:email, :name, :birth_date, :skype_username, :phone_number, :start_date, :avatar, :comment, :vacation_count, :day_off_count, :status)
     end
 
     def set_user

@@ -22,7 +22,7 @@
       <tbody>
         <% @users.each do |user| %>
           <tr>
-            <td><%= link_to "#{user.first_name} #{user.last_name}", [:admin, user] %></td>
+            <td><%= link_to user.name, [:admin, user] %></td>
             <td><%= user.status %></td>
             <td><%= user.email %></td>
             <td><%= user.phone_number %></td>

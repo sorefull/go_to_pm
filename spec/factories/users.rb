@@ -31,8 +31,7 @@
 FactoryGirl.define do
   factory :user do
     email Faker::Internet.email
-    first_name Faker::Name.first_name
-    last_name Faker::Name.last_name
+    name "#{Faker::Name.first_name} #{Faker::Name.last_name}"
     password SecureRandom.hex(10)
     start_date Faker::Time.backward(1.year)
   end
