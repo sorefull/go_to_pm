@@ -16,7 +16,18 @@
       </div>
     </div>
 
-    <div class="row vert-offset-top-1">
+    <div class="row">
+      <div class="col-md-3">
+        <b>
+          Role:
+        </b>
+      </div>
+      <div class="col-md-9">
+        <%= @user.status %>
+      </div>
+    </div>
+
+    <div class="row">
       <div class="col-md-3">
         <b>Vacation count:</b>
       </div>
@@ -74,7 +85,7 @@
     </div>
 
     <% if @user.birth_date %>
-    <div class="row vert-offset-top-1">
+    <div class="row">
       <div class="col-md-3">
         <b>
           Birth date:
