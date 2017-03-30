@@ -21,7 +21,7 @@
           <tr>
             <td><%= invitation.email %></td>
             <% if invitation.user %>
-              <td><%= link_to "#{invitation.user.first_name} #{invitation.user.last_name}", [:admin, invitation.user] %></td>
+              <td><%= link_to invitation.user.name, [:admin, invitation.user] %></td>
             <% else %>
               <td>Not registered yet</td>
             <% end %>

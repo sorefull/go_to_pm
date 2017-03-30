@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
       ivititation = Invitation.find_by(secure_key: params[:secure_key])
       raise ActionController::RoutingError.new('Not Found') unless ivititation
     end
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :skype_username, :birth_date, :phone_number, :avatar, :secure_key])
-    devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name, :skype_username, :birth_date, :phone_number, :avatar])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :skype_username, :birth_date, :phone_number, :avatar, :secure_key])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :skype_username, :birth_date, :phone_number, :avatar])
   end
 end
