@@ -8,7 +8,7 @@
 #  reset_password_token   :string
 #  reset_password_sent_at :datetime
 #  remember_created_at    :datetime
-#  sign_in_count          :integer          default("0"), not null
+#  sign_in_count          :integer          default(0), not null
 #  current_sign_in_at     :datetime
 #  last_sign_in_at        :datetime
 #  current_sign_in_ip     :string
@@ -21,11 +21,11 @@
 #  skype_username         :string
 #  phone_number           :string
 #  start_date             :datetime
-#  vacation_count         :integer          default("0"), not null
-#  day_off_count          :integer          default("0"), not null
+#  vacation_count         :integer          default(0), not null
+#  day_off_count          :integer          default(0), not null
 #  avatar                 :string
 #  comment                :text
-#  role                   :integer          default("0"), not null
+#  role                   :integer          default("user"), not null
 #
 
 class User < ApplicationRecord

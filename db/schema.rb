@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161230085902) do
+ActiveRecord::Schema.define(version: 20170425101152) do
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "title"
+    t.integer  "parent_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["parent_id"], name: "index_categories_on_parent_id"
+  end
 
   create_table "invitations", force: :cascade do |t|
     t.string   "secure_key"
@@ -26,6 +34,15 @@ ActiveRecord::Schema.define(version: 20161230085902) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.index ["user_id"], name: "index_notifications_on_user_id"
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.string   "title"
+    t.text     "body"
+    t.integer  "parent_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["parent_id"], name: "index_posts_on_parent_id"
   end
 
   create_table "users", force: :cascade do |t|

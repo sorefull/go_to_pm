@@ -1,0 +1,21 @@
+<li>
+  <a href='#' class="category"><%= category.title %></a>
+  <ul>
+    <% if current_user.admin? %>
+      <%= link_to '', new_admin_wiki_category_path(parent_id: category), class: 'glyphicon glyphicon-plus',  style: "text-decoration:none" %>
+      <%= link_to '', edit_admin_wiki_category_path(category), class: 'glyphicon glyphicon-pencil',  style: "text-decoration:none" %>
+      <%= link_to '', [:admin, :wiki, category], method: :delete, class: 'glyphicon glyphicon-remove',  style: "text-decoration:none" %>
+      <%= link_to 'post', new_admin_wiki_category_post_path(category), class: 'glyphicon glyphicon-plus',  style: "text-decoration:none" %>
+    <% end %>
+    <% category.children.each do |child_category| %>
+      <%= render partial: 'wiki/categories/category', locals: {category: child_category} %>
+    <% end %>
+    <% category.posts.each do |child_post| %>
+      <li><%= link_to child_post.title, [:wiki, child_post], remote: true, class: 'wiki_post' %></li>
+      <% if current_user.admin? %>
+        <%= link_to '', edit_admin_wiki_category_post_path(category, child_post), class: 'glyphicon glyphicon-pencil',  style: "text-decoration:none" %>
+        <%= link_to '', [:admin, :wiki, child_post.parent, child_post], method: :delete, class: 'glyphicon glyphicon-remove',  style: "text-decoration:none" %>
+      <% end %>
+    <% end %>
+  </ul>
+</li>

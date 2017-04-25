@@ -1,0 +1,5 @@
+<%= form_for [:admin, :wiki, post.parent, post] do |f| %>
+  <%= f.text_field :title %>
+  <%= f.cktext_area :body %>
+  <%= f.submit %>
+<% end %>

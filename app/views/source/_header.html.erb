@@ -29,6 +29,9 @@
                   Notifications <% if current_user.notifications.unread.count > 0 %><span class="notification"><%= current_user.notifications.unread.count %></span><% end %>
                 <% end %>
               </li>
+              <li>
+                <%= link_to 'Wiki', wiki_categories_path %>
+              </li>
               <% if policy([:admin, :user]).index? %>
                 <li>
                     <%= link_to 'Users', admin_users_path, class: 'admin' %>

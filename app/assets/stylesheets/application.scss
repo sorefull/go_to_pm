@@ -2,6 +2,8 @@
 @import "bootstrap";
 @import "devise_bootstrap_views";
 @import "rails_bootstrap_forms";
+@import "liHarmonica.css";
+@import "liHarmonicaClear.css";
 
 @for $i from 0 through 12 {
   .vert-offset-top-#{$i} {

@@ -1,0 +1,5 @@
+<%= form_for [:admin, :wiki, category] do |f| %>
+  <%= f.text_field :title %>
+  <%= f.hidden_field :parent_id %>
+  <%= f.submit %>
+<% end %>

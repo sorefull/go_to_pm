@@ -1,0 +1,45 @@
+/*liHarmonicaClear*/
+/*skinClear*/
+.skinClear,
+.skinClear ul {list-style:none; padding:0; margin:0; font:14px/1.2em Arial, Helvetica, sans-serif}
+.skinClear ul { display:none; margin:0 0 0 10px; //zoom:1}
+.skinClear li {list-style:none; }
+.skinClear a {
+	color:#888;
+	display:block;
+	position:relative;
+	text-decoration:none;
+	padding:1px 0 1px 9px;
+}
+.skinClear a:before {
+	//zoom:1;
+	content:'';
+	width: 0;
+    height: 0;
+	border:0;
+    border-top: 3px solid transparent;
+    border-left: 4px solid #ccc;
+    border-bottom: 3px solid transparent;
+	display:inline-block;
+	position:absolute;
+	top:5px; 
+	left:0px;
+	margin:0 4px 0 0;
+}
+.skinClear a.harFull.harOpen:before {
+    border:0;
+	border-left: 3px solid transparent;
+    border-top: 4px solid #000;
+    border-right: 3px solid transparent;
+	top:7px; 
+}
+.skinClear a.harFull:before {
+    border:0;
+	border-top: 3px solid transparent;
+    border-left: 4px solid #000;
+    border-bottom: 3px solid transparent;
+	top:5px; 
+}
+.skinClear a:hover {text-decoration:underline;}
+.skinClear a.cur { color:#000}
+.skinClear a.harOpen { color:#000}

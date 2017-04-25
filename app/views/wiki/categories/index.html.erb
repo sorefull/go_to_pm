@@ -1,0 +1,15 @@
+<div class="raw">
+  <h1>WIKI</h1>
+  <div class="col-md-3">
+    <h2>Categories</h2>
+    <ul class="anyClass skinPlank">
+      <% if current_user.admin? %>
+        <%= link_to '', new_admin_wiki_category_path, class: 'glyphicon glyphicon-plus',  style: "text-decoration:none" %>
+      <% end %>
+      <% @categories.each do |category| %>
+        <%= render partial: 'wiki/categories/category', locals: {category: category} %>
+      <% end %>
+    </ul>
+  </div>
+  <div class="col-md-9" id="content"></div>
+</div>

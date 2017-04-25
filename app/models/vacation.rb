@@ -10,8 +10,9 @@
 #  user_id       :integer
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  offset        :integer          default("0"), not null
-#  status        :integer          default("0"), not null
+#  offset        :integer          default(0), not null
+#  status        :integer          default("unapproved"), not null
+#  admin_comment :text
 #
 
 class Vacation < ApplicationRecord
